@@ -1,0 +1,24 @@
+{
+  "name": "generator-joomla-template",
+  "version": "0.0.1",
+  "description": "A Yo Generator to generate a joomla template",
+  "scripts": {
+    "build": "bower && grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/novusidea/generator-joomla-template.git"
+  },
+  "keywords": [
+    "joomla",
+    "template",
+    "yo",
+    "generator"
+  ],
+  "author": "novusidea",
+  "license": "The MIT License (MIT)",
+  "bugs": {
+    "url": "https://github.com/novusidea/generator-joomla-template/issues"
+  },
+  "homepage": "https://github.com/novusidea/generator-joomla-template"
+}
