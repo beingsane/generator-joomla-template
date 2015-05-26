@@ -38,7 +38,11 @@ module.exports = yeoman.generators.Base.extend({
 		
 		app: function () {
 			
-			var i, file, files, variables;
+			var i			= 0,
+				file		= '',
+				files		= [],
+				variables	= [],
+				fileList	= [];
 
 			this.destinationRoot( this.props.tpl_name );
 			
@@ -49,11 +53,33 @@ module.exports = yeoman.generators.Base.extend({
 				'template_preview.png', 'template_thumbnail.png'
 			];
 			
+			fs.readdir(this.destinationRoot(), function(err, list) {
+				if(err) throw err;
+				
+				list.forEach(function(file) {
+					
+					fs.stat(file, function (err, stats) {
+						if(err) throw err;
+						
+						if (stats.isFile()) {
+							fileList.push('<filename>' + file + '</filename>');
+						}
+						
+						if (stats.isDirectory()) {
+							fileList.push('<folder>' + file + '</folder>');
+						}
+					});
+
+				});
+				
+			});
+			
 			variables = {
 				tpl_name:		this.props.tpl_name,
 				tpl_name_upper:	string.underscored(this.props.tpl_name).toUpperCase(),
 				tpl_version:	this.props.tpl_version,
-				tpl_date:		now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate()
+				tpl_date:		now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate(),
+				tpl_files:		''
 			};
 		
 			this.fs.copyTpl(
@@ -86,16 +112,10 @@ module.exports = yeoman.generators.Base.extend({
 				variables
 			);
 			
-			for(i = 0; i < files.length; i++) {
+			for(; i < files.length; i++) {
 				file = files[i];
 				this.fs.copyTpl( this.templatePath('_' + file), this.destinationPath(file) );
 			}
-			
-			this.fs.copyTpl(
-				this.templatePath('_templateDetails.xml'),
-				this.destinationPath('templateDetails.xml'),
-				{file_list: '<file></file>'}
-			);
 		
 		},
 
