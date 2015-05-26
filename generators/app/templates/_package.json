@@ -1,0 +1,5 @@
+{
+  "name": "<%= tpl_name %>",
+  "version": "<%= tpl_version %>",
+  "dependencies": {}
+}

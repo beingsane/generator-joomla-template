@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 2.5//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/2.5/template-install.dtd">
+<extension version="3.1" type="template" client="site">
+	<name><%= tpl_name %></name>
+	<version><%= tpl_version %></version>
+	<creationDate><%= tpl_date %></creationDate>
+	<author></author>
+	<authorEmail></authorEmail>
+	<copyright>Copyright (C) 2005 - 2015 Open Source Matters, Inc. All rights reserved.</copyright>
+	<description>TPL_<%= tpl_name_upper %>_XML_DESCRIPTION</description>
+	<files>
+		<filename>templateDetails.xml</filename>
+	</files>
+	<positions>
+		<position>position-0</position>
+		<position>position-1</position>
+		<position>position-2</position>
+		<position>position-3</position>
+	</positions>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.tpl_<%= tpl_name %>.ini</language>
+		<language tag="en-GB">en-GB/en-GB.tpl_<%= tpl_name %>.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="advanced">
+				<field name="templateColor" class="" type="color" default="#08C" label="TPL_<%= tpl_name_upper %>_COLOR_LABEL" description="TPL_<%= tpl_name_upper %>_COLOR_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

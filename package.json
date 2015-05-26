@@ -1,24 +1,29 @@
 {
   "name": "generator-joomla-template",
   "version": "0.0.1",
-  "description": "A Yo Generator to generate a joomla template",
-  "scripts": {
-    "build": "bower && grunt"
+  "description": "Yeoman generator",
+  "license": "MIT",
+  "main": "app/index.js",
+  "repository": "novusidea/generator-joomla-template",
+  "author": {
+    "name": "Martin",
+    "email": "mail@novusidea.de",
+    "url": "https://github.com/novusidea"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/novusidea/generator-joomla-template.git"
-  },
+  "files": [
+    "generators"
+  ],
   "keywords": [
     "joomla",
-    "template",
-    "yo",
-    "generator"
+	"template",
+	"yeoman",
+	"yo",
+	"generator"
   ],
-  "author": "novusidea",
-  "license": "The MIT License (MIT)",
-  "bugs": {
-    "url": "https://github.com/novusidea/generator-joomla-template/issues"
-  },
-  "homepage": "https://github.com/novusidea/generator-joomla-template"
+  "dependencies": {
+    "chalk": "^1.0.0",
+    "underscore.string": "^3.0.3",
+    "yeoman-generator": "^0.19.0",
+    "yosay": "^1.0.2"
+  }
 }
