@@ -42,45 +42,53 @@ module.exports = yeoman.generators.Base.extend({
 				file		= '',
 				files		= [],
 				variables	= [],
-				fileList	= [];
+				fileList	= [],
+				fileString	= [];
 
 			this.destinationRoot( this.props.tpl_name );
 			
-			files = [
-				'css', 'fonts', 'html', 'images', 'js',
-				'component.php', 'error.php', 'favicon.ico',
-				'index.html', 'index.php', 'offline.php',
-				'template_preview.png', 'template_thumbnail.png'
+			fileList = [
+				{type: 'folder',	name: 'css'},
+				{type: 'folder',	name: 'fonts'},
+				{type: 'folder',	name: 'html'},
+				{type: 'folder',	name: 'images'},
+				{type: 'folder',	name: 'js'},
+				{type: 'folder',	name: 'language'},
+				{type: 'filename',	name: 'component.php'},
+				{type: 'filename',	name: 'error.php'},
+				{type: 'filename',	name: 'favicon.ico'},
+				{type: 'filename',	name: 'index.html'},
+				{type: 'filename',	name: 'index.php'},
+				{type: 'filename',	name: 'offline.php'},
+				{type: 'filename',	name: 'package.json'},
+				{type: 'filename',	name: 'template_preview.png'},
+				{type: 'filename',	name: 'template_thumbnail.png'},
+				{type: 'filename',	name: 'templateDetails.xml'}
 			];
 			
-			fs.readdir(this.destinationRoot(), function(err, list) {
-				if(err) throw err;
-				
-				list.forEach(function(file) {
-					
-					fs.stat(file, function (err, stats) {
-						if(err) throw err;
-						
-						if (stats.isFile()) {
-							fileList.push('<filename>' + file + '</filename>');
-						}
-						
-						if (stats.isDirectory()) {
-							fileList.push('<folder>' + file + '</folder>');
-						}
-					});
-
-				});
-				
+			fileList.forEach(function(file) {
+				fileString += '\n\t\t<' + file.type + '>' + file.name + '</' + file.type + '>';
 			});
+			fileString += '\n\t';
 			
 			variables = {
 				tpl_name:		this.props.tpl_name,
 				tpl_name_upper:	string.underscored(this.props.tpl_name).toUpperCase(),
+				tpl_name_human:	string.humanize(this.props.tpl_name),
 				tpl_version:	this.props.tpl_version,
 				tpl_date:		now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate(),
-				tpl_files:		''
+				tpl_files:		fileString
 			};
+			
+			this.fs.copy(
+				this.templatePath('_editorconfig'),
+				this.destinationPath('.editorconfig')
+			);
+			
+			this.fs.copy(
+				this.templatePath('_jshintrc'),
+				this.destinationPath('.jshintrc')
+			);
 		
 			this.fs.copyTpl(
 				this.templatePath('_package.json'),
@@ -94,9 +102,20 @@ module.exports = yeoman.generators.Base.extend({
 				variables
 			);
 			
+			this.fs.copy(
+				this.templatePath('_Gruntfile.js'),
+				this.destinationPath('Gruntfile.js')
+			);
+			
 			this.fs.copyTpl(
 				this.templatePath('_templateDetails.xml'),
 				this.destinationPath('templateDetails.xml'),
+				variables
+			);
+			
+			this.fs.copyTpl(
+				this.templatePath('_index.php'),
+				this.destinationPath('index.php'),
 				variables
 			);
 			
@@ -112,28 +131,29 @@ module.exports = yeoman.generators.Base.extend({
 				variables
 			);
 			
+			files = [
+				'css', 'fonts', 'html', 'images', 'js', 'source',
+				'component.php', 'error.php', 'favicon.ico',
+				'index.html', 'offline.php',
+				'template_preview.png', 'template_thumbnail.png'
+			];
+			
 			for(; i < files.length; i++) {
 				file = files[i];
 				this.fs.copyTpl( this.templatePath('_' + file), this.destinationPath(file) );
 			}
 		
 		},
-
-		projectfiles: function () {
-			this.fs.copy(
-				this.templatePath('_editorconfig'),
-				this.destinationPath('.editorconfig')
-			);
-			this.fs.copy(
-				this.templatePath('_jshintrc'),
-				this.destinationPath('.jshintrc')
-			);
-		}
 	
 	},
 
-	/*install: function () {
-		this.installDependencies();
-	}*/
+	install: function () {
+		var THIS = this;
+		THIS.installDependencies({
+			callback: function(){
+				THIS.spawnCommand('grunt');
+			}
+		});
+	}
 	
 });

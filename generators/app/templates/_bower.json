@@ -1,6 +1,10 @@
 {
   "name": "<%= tpl_name %>",
   "version": "<%= tpl_version %>",
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "respond": "~1.4.2",
+    "modernizr": "~2.8.3"
+  }
 }
 
