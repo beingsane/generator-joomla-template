@@ -14,11 +14,9 @@
     "generators"
   ],
   "keywords": [
+    "yeoman-generator",
     "joomla",
-	"template",
-	"yeoman",
-	"yo",
-	"generator"
+	"template"
   ],
   "dependencies": {
     "chalk": "^1.0.0",

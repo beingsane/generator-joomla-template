@@ -1,10 +1,12 @@
 {
   "name": "<%= tpl_name %>",
   "version": "<%= tpl_version %>",
+  "description": "<%= tpl_description %>",
+  "author": "<%= tpl_author %> <<%= tpl_author_email %>>",
+  "homepage": "<%= tpl_homepage %>",
+  "license": "<%= tpl_license %>",
   "dependencies": {
-    "bootstrap": "~3.3.4",
     "respond": "~1.4.2",
     "modernizr": "~2.8.3"
   }
 }
-

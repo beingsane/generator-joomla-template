@@ -30,7 +30,7 @@
 	$this->setGenerator(false);
 	
 	// force latest IE & chrome frame
-	$doc->setMetadata('X-UA-Compatible', 'IE=edge', true);
+	$doc->setMetadata('X-UA-Compatible', 'IE=edge,chrome=1', true);
 	
 	// set viewport metatag
 	$doc->setMetadata('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no');
@@ -46,37 +46,24 @@
 	//unset($this->_scripts[JURI::root(true).'/media/jui/js/jquery-noconflict.js']);
 	//unset($this->_scripts[JURI::root(true).'/media/jui/js/jquery-migrate.min.js']);
 	//unset($this->_scripts[JURI::root(true).'/media/system/js/caption.js']);
-	unset($this->_scripts[JURI::root(true).'/media/jui/js/bootstrap.min.js']);
+	//unset($this->_scripts[JURI::root(true).'/media/jui/js/bootstrap.min.js']);
 	//unset($this->_script['text/javascript']);
+	
 	
 	// add Stylesheet
 	$doc->addStyleSheet($tpath . '/css/main.min.css');
+	$doc->addStyleDeclaration('body{background-color:' . $params->get('background_color') . '}');
 	
 	// add Script
+	JHtml::_('jquery.framework');
 	$doc->addScript($tpath . '/js/main.min.js');
 
 	$bodyClass .= ' ' . $option . ' view-' . $view;
 	$bodyClass .= ($layout ? ' layout-' . $layout : ' no-layout');
 	$bodyClass .= ($task ? ' task-' . $task : ' no-task');
 	$bodyClass .= ($itemid ? ' itemid-' . $itemid : '');
-	$bodyClass .= ($params->get('fluidContainer') ? ' fluid' : '');
 
 	if(!empty($bodyClass)) {
 		$bodyClass = ' class="'.$bodyClass.'"';
-	}
-
-	if( $this->countModules('left') XOR $this->countModules('right') ) {
-		$contentColumn	= 'col-sm-9';
-		$leftColumn		= 'col-sm-3';
-		$rightColumn	= 'col-sm-3';
-	} else
-	if( $this->countModules('left') AND $this->countModules('right') ) {
-		$contentColumn = 'col-sm-8';
-		$leftColumn		= 'col-sm-2';
-		$rightColumn	= 'col-sm-2';
-	} else {
-		$contentColumn = 'col-xs-12';
-		$leftColumn		= '';
-		$rightColumn	= '';
 	}
 ?>

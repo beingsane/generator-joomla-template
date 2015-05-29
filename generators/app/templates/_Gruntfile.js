@@ -30,23 +30,7 @@ module.exports = function(grunt) {
 		
 		concat: {
 			js: {
-				src: [
-					'bower_components/bootstrap/js/transition.js',
-					'bower_components/bootstrap/js/alert.js',
-					'bower_components/bootstrap/js/button.js',
-					'bower_components/bootstrap/js/carousel.js',
-					'bower_components/bootstrap/js/collapse.js',
-					'bower_components/bootstrap/js/dropdown.js',
-					'bower_components/bootstrap/js/modal.js',
-					'bower_components/bootstrap/js/tooltip.js',
-					'bower_components/bootstrap/js/popover.js',
-					'bower_components/bootstrap/js/scrollspy.js',
-					'bower_components/bootstrap/js/tab.js',
-					'bower_components/bootstrap/js/affix.js',
-					'bower_components/modernizr/modernizr.js',
-					'bower_components/respond/src/respond.js',
-					'source/js/scripts.js'
-				],
+				src: ['source/js/scripts.js'],
 				dest: 'js/main.js'
 			}
 		},
@@ -60,10 +44,7 @@ module.exports = function(grunt) {
 	
 		less: {
 			css: {
-				src: [
-					'bower_components/bootstrap/less/bootstrap.less',
-					'source/less/styles.less'
-				],
+				src: ['source/less/styles.less'],
 				dest: 'css/main.css',
 			}
 		},
